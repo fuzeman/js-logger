@@ -46,8 +46,9 @@
 	// Predefined logging levels.
 	Logger.DEBUG = defineLogLevel(1, 'DEBUG');
 	Logger.INFO = defineLogLevel(2, 'INFO');
-	Logger.TIME = defineLogLevel(3, 'TIME');
-	Logger.WARN = defineLogLevel(4, 'WARN');
+	Logger.NOTICE = defineLogLevel(3, 'NOTICE');
+	Logger.TIME = defineLogLevel(4, 'TIME');
+	Logger.WARN = defineLogLevel(5, 'WARN');
 	Logger.ERROR = defineLogLevel(8, 'ERROR');
 	Logger.OFF = defineLogLevel(99, 'OFF');
 
@@ -80,6 +81,10 @@
 
 		info: function () {
 			this.invoke(Logger.INFO, arguments);
+		},
+
+		notice: function () {
+			this.invoke(Logger.NOTICE, arguments);
 		},
 
 		warn: function () {
@@ -123,6 +128,7 @@
 		L.time = bind(globalLogger, globalLogger.time);
 		L.timeEnd = bind(globalLogger, globalLogger.timeEnd);
 		L.info = bind(globalLogger, globalLogger.info);
+		L.notice = bind(globalLogger, globalLogger.notice);
 		L.warn = bind(globalLogger, globalLogger.warn);
 		L.error = bind(globalLogger, globalLogger.error);
 
@@ -220,7 +226,7 @@
 					hdlr = console.warn;
 				} else if (context.level === Logger.ERROR && console.error) {
 					hdlr = console.error;
-				} else if (context.level === Logger.INFO && console.info) {
+				} else if (context.level === Logger.NOTICE && console.info) {
 					hdlr = console.info;
 				} else if (context.level === Logger.DEBUG && console.debug) {
 					hdlr = console.debug;
